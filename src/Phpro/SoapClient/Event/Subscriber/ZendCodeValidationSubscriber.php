@@ -9,7 +9,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Check if zend code is installed when generating code
+ * Check if zend code / laminas/laminas-code is installed when generating code
  * Show a helpful error message for when it is not
  *
  * Class ZendCodeValidationListener
@@ -38,8 +38,8 @@ class ZendCodeValidationSubscriber implements EventSubscriberInterface
         $io = new SymfonyStyle($event->getInput(), $event->getOutput());
         $io->error(
             [
-                'zend-code not installed, require it with this command:',
-                'composer require --dev zendframework/zend-code:^3.1.0',
+                'laminas-code not installed, require it with this command:',
+                'composer require --dev laminas/laminas-code:^3.1.0',
             ]
         );
         $event->disableCommand();

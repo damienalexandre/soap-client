@@ -21,7 +21,7 @@ class PropertyAssemblerTest extends TestCase
 {
     function zendCodeCompare($version, $operator)
     {
-        $zendCodeVersion = \PackageVersions\Versions::getVersion('zendframework/zend-code');
+        $zendCodeVersion = \PackageVersions\Versions::getVersion('laminas/laminas-code');
         $zendCodeVersion = substr($zendCodeVersion, 0, strpos($zendCodeVersion, '@'));
 
         return version_compare($zendCodeVersion, $version, $operator);
