@@ -88,7 +88,7 @@ class Client implements ClientInterface
     protected function call(string $method, RequestInterface $request): ResultInterface
     {
         $requestEvent = new Event\RequestEvent($this, $method, $request);
-        $this->dispatcher->dispatch(Events::REQUEST, $requestEvent);
+        $this->dispatcher->dispatch($requestEvent, Events::REQUEST);
 
         try {
             $arguments = ($request instanceof MultiArgumentRequestInterface) ? $request->getArguments() : [$request];
@@ -103,11 +103,11 @@ class Client implements ClientInterface
             }
         } catch (\Exception $exception) {
             $soapException = SoapException::fromThrowable($exception);
-            $this->dispatcher->dispatch(Events::FAULT, new Event\FaultEvent($this, $soapException, $requestEvent));
+            $this->dispatcher->dispatch(new Event\FaultEvent($this, $soapException, $requestEvent), Events::FAULT);
             throw $soapException;
         }
 
-        $this->dispatcher->dispatch(Events::RESPONSE, new Event\ResponseEvent($this, $requestEvent, $result));
+        $this->dispatcher->dispatch(new Event\ResponseEvent($this, $requestEvent, $result), Events::RESPONSE);
         return $result;
     }
 }
