@@ -4,7 +4,7 @@ namespace Phpro\SoapClient\Event;
 
 use Phpro\SoapClient\Client;
 use Phpro\SoapClient\Type\RequestInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class RequestEvent
